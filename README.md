@@ -3,20 +3,23 @@
 This TypeScript project demonstrates scaling concepts through interactive simulations.
 
 ## Features
-- **Horizontal scaling** simulation using Node.js cluster module (utilizing multiple CPU cores)
-- Visual representation of scaling effects
+- **Vertical scaling** demonstration using Node.js cluster module
+- Utilizes all CPU cores on a single machine
+- Automatic worker process management
+- Built-in fault tolerance (auto-restarts crashed workers)
+- Performance benchmarking capabilities
 
 ## Project Structure
 ```
 project-root/
 ├── src/
-│   ├── HorizontalScaling.ts - Cluster-based scaling demo (horizontal scaling)
-│   └── (other source files)
-├── dist/                    - Compiled JavaScript output
-├── node_modules/            - Dependencies
-├── package.json             - Project configuration
-├── tsconfig.json            - TypeScript configuration
-└── README.md                - This file
+│   ├── verticalScaling.ts - Core vertical scaling implementation
+│   ├── tests/            - Performance tests and benchmarks
+│   └── utils/            - Helper functions
+├── docs/                 - Architecture diagrams
+├── dist/                 - Compiled output
+├── package.json          - Project configuration
+└── README.md             - Documentation
 
 ```
 
@@ -25,6 +28,11 @@ project-root/
   - Implemented via Node.js cluster module
   - Each worker process utilizes a CPU core
   - Demonstrated in HorizontalScaling.ts
+- **Vertical Scaling**: Maximizing resource usage on a single machine
+  - Master process forks workers (one per CPU core)
+  - Workers share the load on one machine
+  - No additional servers required
+  - Demonstrated in VerticalScaling.ts
 
 ## Prerequisites
 - Node.js v16+
