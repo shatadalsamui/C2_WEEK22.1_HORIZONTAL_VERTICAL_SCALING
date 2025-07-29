@@ -1,18 +1,16 @@
 # Scaling Demonstrations
 
-This TypeScript project demonstrates both vertical and horizontal scaling concepts through interactive simulations.
+This TypeScript project demonstrates scaling concepts through interactive simulations.
 
 ## Features
-- Vertical scaling simulation showing resource allocation
-- Horizontal scaling simulation using Node.js cluster module
+- **Horizontal scaling** simulation using Node.js cluster module (utilizing multiple CPU cores)
 - Visual representation of scaling effects
 
 ## Project Structure
 ```
 project-root/
 ├── src/
-│   ├── HorizontalScaling.ts - Cluster-based horizontal scaling demo
-│   ├── VerticalScaling.ts   - Vertical scaling simulation
+│   ├── HorizontalScaling.ts - Cluster-based scaling demo (horizontal scaling)
 │   └── (other source files)
 ├── dist/                    - Compiled JavaScript output
 ├── node_modules/            - Dependencies
@@ -21,6 +19,12 @@ project-root/
 └── README.md                - This file
 
 ```
+
+## Key Concepts
+- **Horizontal Scaling**: Adding more processes (workers) to handle load
+  - Implemented via Node.js cluster module
+  - Each worker process utilizes a CPU core
+  - Demonstrated in HorizontalScaling.ts
 
 ## Prerequisites
 - Node.js v16+
@@ -74,3 +78,26 @@ When testing, observe:
 - Different worker PIDs handling requests (shown in server logs)
 - How the load is distributed across workers
 - Automatic worker restarts if you kill a worker process
+
+## Testing Horizontal Scaling
+
+**Note**: Browser/Postman testing won't show parallel processing clearly because:
+- Browsers throttle concurrent requests
+- Manual testing can't trigger simultaneous requests
+- The `&` operator in terminal enables true parallelism
+
+## Testing Parallel Processing
+
+Run 8 parallel requests (one per CPU core):
+```bash
+curl http://localhost:3000/api/1000000000 &
+curl http://localhost:3000/api/2000000000 &
+curl http://localhost:3000/api/3000000000 &
+curl http://localhost:3000/api/4000000000 &
+curl http://localhost:3000/api/5000000000 &
+curl http://localhost:3000/api/100000000 &
+curl http://localhost:3000/api/200000000 &
+curl http://localhost:3000/api/300000000 &
+```
+
+**Note**: Use terminal (`&`) for true parallelism - browsers/Postman throttle requests
